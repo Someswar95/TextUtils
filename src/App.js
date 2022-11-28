@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Home from './components/Home';
+import LoadingBar from 'react-top-loading-bar';
 
 
 function App() {
@@ -21,20 +22,32 @@ function App() {
       setAlert(null);
     }, 1500);
   }
+
+  // state = {
+  //   progress:0
+  // }
+
+  const [progress, setProgress] = useState(0)
+  
+  // setProgress(progress){
+  //   this.setState({progress: progress})
+  // }
+
   return (
     <>
     <Router>
       <Navbar title="TextUtils"/>
+      <LoadingBar
+        color='#f11946'
+        progress={this.state.progress}
+        // onLoaderFinished={() => setProgress(0)}
+      />
       <Alert alert={alert} />
       <div className='container my-3'>
         <Routes>
-          <Route path="/" element={<TextForm showAlert={showAlert} heading="Enter the text to Analyze" />} />
+          <Route path="/" setProgress={setProgress} element={<TextForm showAlert={showAlert} heading="Enter the text to Analyze" />} />
           <Route path="about" element={<About />} />
         </Routes>
-        
-          
-
-        
       </div>
           {/* <TextForm showAlert={showAlert} heading="Enter the text to Analyze" /> */}
       {/* <About /> */}
